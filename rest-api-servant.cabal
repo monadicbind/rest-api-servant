@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: e4eba4776d26e23ce2235267821657cd783de7016735e8c5e4c7afeb400bd592
+-- hash: 28b6a158a72a33d9a78b2d7e8add1ae74916521d2f465205f781ddbf495d37c7
 
 name:           rest-api-servant
 version:        0.1.0.0
@@ -40,7 +40,6 @@ library
     , base-compat
     , either
     , mtl
-    , servant
     , servant-server
     , wai
     , wai-extra
@@ -61,7 +60,6 @@ executable rest-api-servant-exe
     , either
     , mtl
     , rest-api-servant
-    , servant
     , servant-server
     , wai
     , wai-extra
@@ -81,9 +79,11 @@ test-suite rest-api-servant-test
     , base >=4.7 && <5
     , base-compat
     , either
+    , hspec
+    , hspec-wai
+    , hspec-wai-json
     , mtl
     , rest-api-servant
-    , servant
     , servant-server
     , wai
     , wai-extra
