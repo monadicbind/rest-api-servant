@@ -16,6 +16,7 @@ data User = User { userId :: Int , userFirstName :: String , userLastName :: Str
 $(deriveJSON defaultOptions ''User)
 
 type UserAPI = "users" :> Get '[JSON] [User]
+  :<|> "testUsers" :> Get '[JSON] (Either String [User])
 
 app :: Application
 app = serve userAPI server
@@ -24,10 +25,15 @@ userAPI :: Proxy UserAPI
 userAPI = Proxy
 
 server :: Server UserAPI
-server = return users
+server = (return users) :<|> (return testUsers)
 
 users :: [User]
 users = [User 1 "S" "M" , User 2 "A" "G"]
 
+testUsers :: Either String [User]
+testUsers = Left "Failed"
+
+getUsers :: Handler [User]
+getUsers = throwError $ err500 { errBody = "Exception in module UserAPI.  Have a great day!" } 
 
 
